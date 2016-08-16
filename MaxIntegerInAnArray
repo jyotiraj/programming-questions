@@ -1,0 +1,35 @@
+/* Return the largest integer in the array */
+
+/* Solution: Keep track of the current largest integer as you loop through the array */
+int MaxInteger(int numArray[])
+{
+  int curMax, len;
+  len = numArray.length;
+  
+  /* Make sure that there is atleast one element in the array. if None exists then return -1 */
+  if(len <= 0) {
+    return -1;
+  }
+  
+  /* Initialize current max to the first element in the array. */
+  curMax = numArray[0];
+  
+  /* Loop through the array and compare the numbers against the current max. */
+  for(int counter=0; counter < len; counter++) {
+    if(curMax < numArray[counter]) {
+      curMax = numArray[counter];
+    }
+  }
+  
+  return curMax;
+}
+
+/** Big O Analysis: 
+ *  ===============
+ * Input size is assumed to be n (number of elements in the array)
+ * Here each element was compared once to a maximum value resulting in n examinations. Hence the complexity here is O(n) or linear time.  
+ * The time required to run the algorithm increases linearly with the number of input items. 
+ *
+ * Best. Average and Worse cases are all identical for this algorithm.  
+ **/
+ 
