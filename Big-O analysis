@@ -1,0 +1,6 @@
+# How to do Big-O analysis`` 
+
+* Figure our what the input is and what n represents. 
+* Express the number of operations (examinations) the algorithm performs in terms of n. 
+* Eliminate all but the highest order terms
+* Remove all constant factors. 
