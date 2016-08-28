@@ -1,0 +1,90 @@
+# Question: Implement data structure “Map” storing pairs of integers (key, value) and 
+# define following member functions in O(1) runtime: 
+# void insert(key, value), void delete(key), int get(key), int getRandomKey().
+
+# Solution: 
+
+# Analysis: 
+
+# To make operations of O(1) time complexity, hash should be the No.1 thing in your mind.
+# With a hashmap, we can easily achieve O(1) time complexity for Insert, Get and Delete, however, 
+# what makes the question interesting is GetRandomKey function. 
+# A hashmap won’t allow you to get all the keys instantly and you need O(n) time to get a random key.
+
+# Since the problem we have is GetRandomKey is of O(n) time complexity instead of O(1), 
+# a good technique is the time and space tradeoff. 
+# Specifically, if we want to make algorithm faster, we can try using more memory. 
+# This gives us some rough ideas like using another data structure (maybe tree, queue, linked list, array etc) 
+# to store all the keys separately, or when inserting a pair, we can store some additional data with the pair.
+
+# When getting a random key, the most straightforward approach is to have a random number and 
+# somehow we map this number to the corresponding key. 
+# To make it O(1) time complexity, most likely we’ve got to do the random sampling of an array.
+# The right approach seems to be when inserting a new pair, we store the new key in a separate array. 
+# And when we call GetRandomKey, we can easily to the random sampling of the array in O(1) time complexity. 
+# However, a new problem pops up – Delete operation becomes O(n) since you need to delete key from the array 
+# as well when removing a pair.
+# If you want to achieve O(1) deletion, another option is to use a linked list to store all the keys, 
+# however, this won’t give you O(1) for GetRandomKey.
+
+# There’s a trick here. In essence, you need O(n) time for array deletion is because you are keeping its origin order. 
+# But this is totally unnecessary in the current problem. Suppose you have [1, 4, 2, 5, 9] in the array and you delete 2. 
+# Instead of move 5 and 9 to the left, you can just switch 2 with 9 and reduce the length by 1. 
+# So the deletion can be done in O(1) time complexity, although we lose the order.
+
+# In addition, in order to find the deleted key in array instantly, we also need to store the index in the map as well. 
+# Take the same array as well, when inserting 4 with value 10, we need to store <4, (10, 1)> in the map where 1 is the 
+# index of the key in the array.
+
+# Ref: http://blog.gainlo.co/index.php/2016/08/14/uber-interview-question-map-implementation/
+
+# PseudoCode:
+# ============ 
+
+class Map:
+  hashmap = new Hashmap()
+  array = new Array()
+  length = 0;
+  
+  def IsEmpty():
+    return length === 0
+
+  def Size():
+    return length  
+  
+  def ContainsKey(key):
+    for (var i = 0; i < this.length; i++) {
+      if (this[i].key === key) {
+        return i;
+      }
+    }
+    return -1;
+  def Insert(key, value):
+    index = length;
+    hashmap[key] = (value, index)
+    array[index] = key
+    length++
+
+  def Get(key):
+    // assumes key exists ( add checks for emptiness)
+    // access the value (and not the index)
+    return hashmap[key][0];
+
+  def Delete(key):
+    // first delete from the array 
+    index = hashmap[key][1]
+    swap(array[index],array[length-1])
+    length--
+
+    // update index of the swapped key
+    hashmap[array[index]][1] = index
+
+    // delete from the hashmap
+    del hashmap[key]
+
+  def GetRandomKey():
+    r = random(0,length) 
+    return array[r]
+
+
+
