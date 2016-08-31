@@ -1,0 +1,19 @@
+/**********************************************************************/
+/*   Bubble Sort - the Largest element in the list sinks down first.  */
+/**********************************************************************/
+/* This sorting algorithm is comparison based algorithm in which each pair of adjacent elements is compared 
+    and elements are swapped if they are not in order. This algorithm is not suitable for large data sets as 
+    its average and worst case complexity are of O(n2) where n are no. of items.
+    
+    PseudoCode:
+*/    
+
+do
+  swapped = false
+  for (i = 1 to indexOfLastUnsortedElement) {
+    if leftElement > rightElement {
+      swap(leftElement, rightElement)
+    }
+    swapped = true
+  }
+while swapped
