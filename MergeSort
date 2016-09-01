@@ -1,0 +1,47 @@
+/* MERGE SORT 
+  If the list is of length 0 or 1, then it is already sorted. Otherwise:
+  Divide the unsorted list into two sublists of about half the size.
+  Sort each sublist recursively by re-applying merge sort.
+  Merge the two sublists back into one sorted list.
+  
+  Analysis: O(nlog(n))
+  
+  Reference: http://bigocheatsheet.com/
+*/
+
+var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
+ 
+function mergeSort(arr)
+{
+    if (arr.length < 2)
+        return arr;
+ 
+    var middle = parseInt(arr.length / 2);
+    var left   = arr.slice(0, middle);
+    var right  = arr.slice(middle, arr.length);
+ 
+    return merge(mergeSort(left), mergeSort(right));
+}
+ 
+function merge(left, right)
+{
+    var result = [];
+    var il=0,ir=0;
+    while (il < left.length && ir < right.length) {
+        if (left[il] <= right[ir]) {
+            result.push(left[il++]);
+        } else {
+            result.push(right[ir++]);
+        }
+    }
+    // push all the remaining elements from the sorted left array
+    while (il < left.length)
+        result.push(left[il++]);
+    // push all the remaining elements from the sorted right array
+    while (ir < right.length)
+        result.push(right[ir++]);
+ 
+    return result;
+}
+ 
+console.log(mergeSort(a));
