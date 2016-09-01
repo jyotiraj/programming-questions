@@ -6,14 +6,34 @@
     its average and worst case complexity are of O(n2) where n are no. of items.
     
     PseudoCode:
-*/    
+        do
+          swapped = false
+          for (i = 1 to indexOfLastUnsortedElement) {
+            if leftElement > rightElement {
+              swap(leftElement, rightElement)
+            }
+            swapped = true
+          }
+        while swapped
+*/ 
 
-do
-  swapped = false
-  for (i = 1 to indexOfLastUnsortedElement) {
-    if leftElement > rightElement {
-      swap(leftElement, rightElement)
-    }
-    swapped = true
-  }
-while swapped
+var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
+ 
+function bubbleSort(a)
+{
+    var swapped;
+    do {
+        swapped = false;
+        for (var i=0; i < a.length-1; i++) {
+            if (a[i] > a[i+1]) {
+                var temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+ 
+bubbleSort(a);
+console.log(a);
