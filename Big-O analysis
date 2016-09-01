@@ -4,3 +4,5 @@
 * Express the number of operations (examinations) the algorithm performs in terms of n. 
 * Eliminate all but the highest order terms
 * Remove all constant factors. 
+
+Reference: http://bigocheatsheet.com/
